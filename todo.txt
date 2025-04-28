@@ -1,0 +1,7 @@
+UI visual indication of geolcation being denied or unavailable and option to change that
+
+Drag-to-reorder clocks
+
+Remove a clock
+
+Animate clocks sliding in, etc.

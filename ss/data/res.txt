@@ -1,0 +1,93 @@
+locationRes
+geonames
+: 
+Array(1)
+0
+    : 
+    adminCode1
+    : 
+    "06"
+    adminCodes1
+    : 
+    {ISO3166_2: '3'}
+    adminName1
+    : 
+    "Sikasso"
+    countryCode
+    : 
+    "ML"
+    countryId
+    : 
+    "2453866"
+    countryName
+    : 
+    "Mali"
+    distance
+    : 
+    "2.84456"
+    fcl
+    : 
+    "P"
+    fclName
+    : 
+    "city, village,..."
+    fcode
+    : 
+    "PPL"
+    fcodeName
+    : 
+    "populated place"
+    geonameId
+    : 
+    6910364
+    lat
+    : 
+    "11.86818"
+    lng
+    : 
+    "-6.11429"
+    name
+    : 
+    "Ténina"
+    population
+    : 
+    0
+    toponymName
+    : 
+    "Ténina"
+
+Timezone response: 
+
+countryCode
+: 
+"ML"
+countryName
+: 
+"Mali"
+dstOffset
+: 
+0
+gmtOffset
+: 
+0
+lat
+: 
+11.843593126857705
+lng
+: 
+-6.106647985305015
+rawOffset
+: 
+0
+sunrise
+: 
+"2025-04-26 06:07"
+sunset
+: 
+"2025-04-26 18:37"
+time
+: 
+"2025-04-26 08:56"
+timezoneId
+: 
+"Africa/Bamako"
