@@ -40,12 +40,15 @@ const Time = ({
     const [timeZone, setTimeZone] = useState<string>("")
     const [timeZoneOffset, setTimeZoneOffset] = useState<string | null>(null)
 
+    const gepApiKey = import.meta.env.REACT_APP_GEONAMES_API_KEY
+    const geoBaseUrl = import.meta.env.REACT_APP_GEONAMES_BASE_URL
+
     const fetchLocationData = async (coordsArr: [number, number]) => {
         const [lat, lng] = coordsArr
 
         // console.log('Fetching Location data for coords:',city, lat, lng)
         try {
-            const locationRes = await fetch(`http://api.geonames.org/findNearbyJSON?lat=${lat}&lng=${lng}&radius=50&featureClass=P&maxRows=1&username=maxkat1`)
+            const locationRes = await fetch(`${geoBaseUrl}/findNearbyJSON?lat=${lat}&lng=${lng}&radius=50&featureClass=P&maxRows=1&username=${gepApiKey}`)
             const locationData = await locationRes.json()
             // console.log('Location response: ', locationData)
 
@@ -53,12 +56,12 @@ const Time = ({
                 setCountry(locationData.geonames[0].countryName)
 
                 // Fetch closest largest city
-                const cityRes = await fetch(`http://api.geonames.org/citiesJSON?north=${lat+0.5}&south=${lat-0.5}&east=${lng+0.5}&west=${lng-0.5}&maxRows=1&username=maxkat1`)
+                const cityRes = await fetch(`${geoBaseUrl}/citiesJSON?north=${lat+0.5}&south=${lat-0.5}&east=${lng+0.5}&west=${lng-0.5}&maxRows=1&username=${gepApiKey}`)
                 const cityData = await cityRes.json()
                 setCity(cityData.geonames[0].toponymName)
         
                 // fetch timeZone data only if location found
-                const tzRes = await fetch(`http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lng}&username=maxkat1`)
+                const tzRes = await fetch(`${geoBaseUrl}/timezoneJSON?lat=${lat}&lng=${lng}&username=${gepApiKey}`)
                 const tzData = await tzRes.json()
                 // console.log('timeZone response:', tzData)
                 setTimeZone(tzData.timezoneId)

@@ -98,7 +98,7 @@ const Home = () => {
           {isTwentyFourHour ? 'AM / PM' : '24H'} 
         </button>
       </div>
-      <div className='border border-red-500 flex flex-wrap gap-20 justify-evenly items-center w-full h-full'>
+      <div className='flex flex-wrap gap-20 justify-evenly items-center w-full h-full'>
         {clocks.map((coords, idx) => (
           <Time
           key={idx}

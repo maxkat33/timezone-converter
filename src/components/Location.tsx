@@ -44,13 +44,17 @@ const Location = ({ city, setCity, country, setCountry, onCoordsChange, timeZone
 
     }, [input, isSearching])
 
+    const rapidBaseUrl = import.meta.env.VITE_RAPID_BASE_URL
+    const rapidHost = import.meta.env.VITE_RAPID_HOST
+    const rapidApiKey = import.meta.env.VITE_RAPID_API_KEY
+
     const fetchSuggestions = async (input: string) => {
         try {
-            const res = await fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${input}&limit=5&sort=-population`, {
+            const res = await fetch(`${rapidBaseUrl}/v1/geo/cities?namePrefix=${input}&limit=5&sort=-population`, {
                 method: 'GET',
                 headers: {
-                    'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
-                    'x-rapidapi-key': '75ba59f42emshe24a646fadb734ep121e6djsn33ef5a68d27b',
+                    'x-rapidapi-host': rapidHost,
+                    'x-rapidapi-key': rapidApiKey,
                 },
             })
             const data = await res.json()
