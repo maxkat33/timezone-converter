@@ -72,9 +72,27 @@ const Home = () => {
     }
   }, [userCoords])
 
+  let gridClass: string
+
+  if (clocks.length === 1) {
+    gridClass = 'grid-cols-1'
+  } else if (clocks.length === 2) {
+    gridClass = 'grid-cols-2'
+  } else if (clocks.length === 3) {
+    gridClass = 'grid-cols-3'
+  } else if (clocks.length === 4) {
+    gridClass = 'grid-cols-2 grid-rows-2'
+  } else if (clocks.length === 5) {
+    gridClass = 'grid-cols-3 grid-rows-2'
+  } else if (clocks.length === 6) {
+    gridClass = 'grid-cols-3 grid-rows-2'
+  } else {
+    gridClass = 'grid-cols-4 grid-rows-2'
+  }
+
   return (
-    <main className="flex flex-col justify-center items-center p-10 gap-6 h-full bg-white">
-      <div className='flex w-full h-1/12'>
+    <main className="flex flex-col justify-evenly items-center gap-10 p-10 h-[80%] bg-white">
+      <div className='flex w-full'>
         <div className='flex w-full gap-20'>
           <button 
             className="w-1/7 py-2 px-4 rounded bg-indigo-600 hover:bg-indigo-800 text-xl text-white font-bold" 
@@ -82,13 +100,13 @@ const Home = () => {
               setIsNow(true)
               setNow(Date.now())
             }}>
-              Reset Time to Now
+              Reset to Now
           </button>
           <button
             className="w-1/7 py-2 px-4 rounded bg-indigo-600 hover:bg-indigo-800 text-xl text-white font-bold"
             onClick={() => setClocks(prev => [...prev, getRandomCoords()])}
             >
-            Add New Clock
+            Add Clock
           </button>
         </div>
         <button
@@ -98,7 +116,14 @@ const Home = () => {
           {isTwentyFourHour ? 'AM / PM' : '24H'} 
         </button>
       </div>
-      <div className='flex flex-wrap gap-20 justify-evenly items-center w-full h-full'>
+      <div className={`
+        grid 
+        gap-6 
+        w-full 
+        h-full
+        ${gridClass}
+        auto-rows-fr
+      `}>
         {clocks.map((coords, idx) => (
           <Time
           key={idx}

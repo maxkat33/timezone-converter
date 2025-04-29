@@ -25,7 +25,7 @@ const DigitalDisplay = ({
   chosenCoords, 
   setChosenCoords, 
   isTwentyFourHour, 
-  timeZone 
+  timeZone
 }: Props) => {
 
   const liveTime = getLocaleTimeString(now, timeZone, isTwentyFourHour)
@@ -47,10 +47,10 @@ const DigitalDisplay = ({
   
   return (
       <input
-        className='text-center text-xl w-[10em]'
+        className='text-center'
         type={isNow ? "text" : "time"}
         onChange={(e)=> {handleTimeChange(e)}} 
-        value={isNow? liveTime: manualTime}
+        value={isNow ? liveTime: manualTime}
       /> 
   )
 }

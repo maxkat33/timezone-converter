@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+
+.react-clock {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+}

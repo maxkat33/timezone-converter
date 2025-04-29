@@ -40,14 +40,16 @@ const Time = ({
     const [timeZone, setTimeZone] = useState<string>("")
     const [timeZoneOffset, setTimeZoneOffset] = useState<string | null>(null)
 
-    const gepApiKey = import.meta.env.REACT_APP_GEONAMES_API_KEY
-    const geoBaseUrl = import.meta.env.REACT_APP_GEONAMES_BASE_URL
+    const gepApiKey = import.meta.env.VITE_GEONAMES_API_KEY
+    const geoBaseUrl = import.meta.env.VITE_GEONAMES_BASE_URL
 
     const fetchLocationData = async (coordsArr: [number, number]) => {
         const [lat, lng] = coordsArr
 
         // console.log('Fetching Location data for coords:',city, lat, lng)
         try {
+            console.log('geoBaseUrl:', geoBaseUrl);
+            console.log('gepApiKey:', gepApiKey);
             const locationRes = await fetch(`${geoBaseUrl}/findNearbyJSON?lat=${lat}&lng=${lng}&radius=50&featureClass=P&maxRows=1&username=${gepApiKey}`)
             const locationData = await locationRes.json()
             // console.log('Location response: ', locationData)
@@ -86,8 +88,15 @@ const Time = ({
     }
   
     return (
-        <div className="relative flex flex-col gap-4 justify-center items-center size-max px-6 py-10 bg-neutral-200 rounded-lg">
-            <div className='flex flex-col gap-4 justify-center items-center'>
+        <div className="
+            relative 
+            flex flex-col gap-4 justify-center items-center 
+            w-full h-full 
+            p-4
+            text-[clamp(1rem,2.5vw,2rem)]
+            bg-neutral-200 
+            rounded-2xl shadow-lg">
+            <div className="flex-grow flex flex-col justify-center items-center gap-[clamp(0.5rem,2vw,1rem)]">
                 <AnalogDisplay
                     now={now} 
                     isNow={isNow} 
@@ -96,33 +105,33 @@ const Time = ({
                     chosenCoords={chosenCoords}
                     timeZone={timeZone}
                 />
-                <DigitalDisplay 
-                    now={now} 
-                    isNow={isNow} 
-                    setIsNow={setIsNow} 
-                    chosenTime={chosenTime}
-                    setChosenTime={setChosenTime}
-                    coords={coords}
-                    chosenCoords={chosenCoords}
-                    setChosenCoords={setChosenCoords}
-                    isTwentyFourHour={isTwentyFourHour}
-                    timeZone={timeZone}
+                <div className='flex flex-col gap-4 justify-center items-center'>
+                    <DigitalDisplay 
+                        now={now} 
+                        isNow={isNow} 
+                        setIsNow={setIsNow} 
+                        chosenTime={chosenTime}
+                        setChosenTime={setChosenTime}
+                        coords={coords}
+                        chosenCoords={chosenCoords}
+                        setChosenCoords={setChosenCoords}
+                        isTwentyFourHour={isTwentyFourHour}
+                        timeZone={timeZone}
+                        />
+                    <Location
+                        city={city} 
+                        setCity={setCity} 
+                        country={country} 
+                        setCountry={setCountry} 
+                        onCoordsChange={onCoordsChange} 
+                        timeZoneOffset={timeZoneOffset}
+                        />
+                </div>
+                <GrFormClose 
+                    className='absolute m-2 top-0 right-0 text-[3rem] text-black hover:text-[3.5rem] hover:text-red-700 hover:m-1 transition-all'
+                    onClick={()=>{onRemove()}}
                 />
             </div>
-            <div className='flex flex-col gap-4 w-full'>
-                <Location
-                    city={city} 
-                    setCity={setCity} 
-                    country={country} 
-                    setCountry={setCountry} 
-                    onCoordsChange={onCoordsChange} 
-                    timeZoneOffset={timeZoneOffset}
-                />
-            </div>
-            <GrFormClose 
-                className='absolute m-2 top-0 right-0 text-[3rem] text-indigo-700 hover:text-[3.5rem] hover:text-indigo-900 hover:m-1 transition-all'
-                onClick={()=>{onRemove()}}
-            />
         </div>
     )
 }

@@ -17,7 +17,14 @@ type Props = {
     timeZoneOffset: string
 }
 
-const Location = ({ city, setCity, country, setCountry, onCoordsChange, timeZoneOffset }: Props) => {
+const Location = ({ 
+    city, 
+    setCity, 
+    country, 
+    setCountry, 
+    onCoordsChange, 
+    timeZoneOffset 
+}: Props) => {
     
     const [input, setInput] = useState<string>(`${city}, ${country}`)
     const [suggestions, setSuggestions] = useState<Suggestion[]>([])
@@ -75,10 +82,12 @@ const Location = ({ city, setCity, country, setCountry, onCoordsChange, timeZone
     }
 
     return (
-        <div className='relative'>
-            <p>{timeZoneOffset}</p>
+        <div className='flex gap-10'>
+            <p className='text-center'>
+                {timeZoneOffset}
+            </p>
             <input
-                className='w-full'
+                className='relative'
                 type="text"
                 value={input}
                 onChange={(e) => {

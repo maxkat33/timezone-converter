@@ -21,13 +21,15 @@ const AnalogDisplay = ({ now, isNow, chosenTime, coords, chosenCoords, timeZone}
       chosenDate.setHours(hours, minutes, 0, 0)
     } else {
       const timestamp = convertChosenTimeToTimestamp(chosenTime, timeZone)
-      chosenDate = getLocaleDate(timestamp,  timeZone)
+      chosenDate = getLocaleDate(timestamp, timeZone)
     }
 
   return (
-    <Clock
-      className='border bg-white rounded-full' 
-      value={isNow ? liveDate : chosenDate} />
+    <div className='size-[8em]'>
+      <Clock
+        className='react-clock bg-white rounded-full' 
+        value={isNow ? liveDate : chosenDate} />
+    </div>
   )
 }
 
