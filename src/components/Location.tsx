@@ -82,12 +82,19 @@ const Location = ({
     }
 
     return (
-        <div className='flex gap-10'>
-            <p className='text-center'>
+        <div className='
+            border-green-500
+            flex justify-between gap-2
+        '>
+            <p className='border-pink-800'>
                 {timeZoneOffset}
             </p>
             <input
-                className='relative'
+                className='
+                border-yellow-600 
+                relative
+                text-center
+                '
                 type="text"
                 value={input}
                 onChange={(e) => {
@@ -98,13 +105,19 @@ const Location = ({
             />
             {suggestions.length > 0 && (
                 <ul 
-                    className='absolute w-full list-none bg-white border border-gray-200 overflow-y-auto z-999'
+                className='
+                absolute 
+                bg-white border-gray-200 
+                list-none 
+                overflow-y-auto 
+                z-999
+                '
                 >
                     {suggestions.map((loc) => (
                         <li
-                            key={loc.id}
-                            className='p-2 cursor-pointer'
-                            onClick={() => handleSelect(loc)}
+                        key={loc.id}
+                        className='p-2 cursor-pointer'
+                        onClick={() => handleSelect(loc)}
                         >
                             {`${loc.city}, ${loc.country}`}
                         </li>

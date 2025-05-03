@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getRandomCoords, formatTimeZoneOffsetString } from '../utils'
-import { GrFormClose } from "react-icons/gr"
+import { GrFormClose } from 'react-icons/gr'
 
 import AnalogDisplay from './AnalogDisplay'
 import DigitalDisplay from './DigitalDisplay'
@@ -16,6 +16,7 @@ type Props = {
     coords: [number, number]
     chosenCoords: [number, number]
     setChosenCoords: React.Dispatch<React.SetStateAction<[number, number]>>
+    numClocks: number
     onCoordsChange: (newCoords: [number, number]) => void
     onRemove: () => void
 }
@@ -30,14 +31,15 @@ const Time = ({
     coords, 
     onCoordsChange, 
     chosenCoords, 
-    setChosenCoords, 
+    setChosenCoords,
+    numClocks, 
     onRemove 
 }:  Props) => {  
 
     // state
-    const [city, setCity] = useState<string>("")
-    const [country, setCountry] = useState<string>("")
-    const [timeZone, setTimeZone] = useState<string>("")
+    const [city, setCity] = useState<string>('')
+    const [country, setCountry] = useState<string>('')
+    const [timeZone, setTimeZone] = useState<string>('')
     const [timeZoneOffset, setTimeZoneOffset] = useState<string | null>(null)
 
     const gepApiKey = import.meta.env.VITE_GEONAMES_API_KEY
@@ -48,8 +50,6 @@ const Time = ({
 
         // console.log('Fetching Location data for coords:',city, lat, lng)
         try {
-            console.log('geoBaseUrl:', geoBaseUrl);
-            console.log('gepApiKey:', gepApiKey);
             const locationRes = await fetch(`${geoBaseUrl}/findNearbyJSON?lat=${lat}&lng=${lng}&radius=50&featureClass=P&maxRows=1&username=${gepApiKey}`)
             const locationData = await locationRes.json()
             // console.log('Location response: ', locationData)
@@ -88,15 +88,18 @@ const Time = ({
     }
   
     return (
-        <div className="
-            relative 
-            flex flex-col gap-4 justify-center items-center 
-            w-full h-full 
-            p-4
-            text-[clamp(1rem,2.5vw,2rem)]
-            bg-neutral-200 
-            rounded-2xl shadow-lg">
-            <div className="flex-grow flex flex-col justify-center items-center gap-[clamp(0.5rem,2vw,1rem)]">
+        <div className='
+            border-blue-900
+            relative
+            p-5
+            bg-neutral-300 
+            text-[1.02rem]
+            rounded-[10px]
+            shadow-lg 
+        '>
+            <div className=' 
+                flex flex-col items-center gap-3
+            '>
                 <AnalogDisplay
                     now={now} 
                     isNow={isNow} 
@@ -104,8 +107,12 @@ const Time = ({
                     coords={coords} 
                     chosenCoords={chosenCoords}
                     timeZone={timeZone}
+                    numClocks={numClocks}
                 />
-                <div className='flex flex-col gap-4 justify-center items-center'>
+                <div className='
+                    border-blue-500
+                    flex flex-col gap-2
+                '>
                     <DigitalDisplay 
                         now={now} 
                         isNow={isNow} 
@@ -128,7 +135,12 @@ const Time = ({
                         />
                 </div>
                 <GrFormClose 
-                    className='absolute m-2 top-0 right-0 text-[3rem] text-black hover:text-[3.5rem] hover:text-red-700 hover:m-1 transition-all'
+                    className='
+                    absolute 
+                    m-1 top-0 right-0 
+                    text-[3rem] text-black 
+                    hover:text-[3.5rem] hover:text-red-700 hover:m-0 focus:text-red-700 transition-all
+                    '
                     onClick={()=>{onRemove()}}
                 />
             </div>

@@ -1,22 +1,19 @@
 const Header = () => {
-const globeGif = '../assets/globe.gif'
 
   return (
-    <header className='
-        flex
-        justify-between
-        items-center
-        h-[10%]
-        px-10
-        py-15
+    <header className="
+        relative
+        min-h-[12%]
+        p-3
+        flex justify-between items-center
         bg-teal-50
-        text-indigo-900'
-    >
-      <div className='flex flex-col'>
-        <h1 className='text-5xl font-bold'>TimeZones</h1>
-        <h4 className='text-xl p-2'>Converting time manually? Ain't nobody got time fo dat!</h4>
+      `  text-indigo-900
+    ">
+      <div className="flex flex-col">
+        <h1 className="text-[2rem] font-bold">TimeZones</h1>
+        <h4 className="text-[0.8rem]">Converting time manually? Ain't <strong>nobody</strong> got time fo dat!</h4>
       </div>
-      <img src='/globe.gif' alt="Rotating Globe" className="w-18 h-24 mr-8 mt-2" />
+      <img src="/globe.gif" alt="Rotating Globe" className="absolute w-8 h-10 top-4 right-4" />
     </header>
   )
 }

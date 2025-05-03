@@ -47,7 +47,13 @@ const DigitalDisplay = ({
   
   return (
       <input
-        className='text-center'
+        className='
+        border-red-500
+        text-[1.1rem]
+        text-center
+        font-normal
+        tracking-wide 
+        '
         type={isNow ? "text" : "time"}
         onChange={(e)=> {handleTimeChange(e)}} 
         value={isNow ? liveTime: manualTime}

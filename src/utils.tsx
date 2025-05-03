@@ -78,7 +78,7 @@ export const formatTimeZoneOffsetString = (timeZoneOffset: number): string => {
     const hoursStr = String(hours).padStart(2, '0')
     const minutesStr = String(minutes).padStart(2, '0')
     
-    return `UTC${sign}${hoursStr}:${minutesStr}`
+    return `UTC ${sign}${hoursStr}:${minutesStr}`
 }
 
 export const formatTimeStamp = (unixTimestamp: number): string => {

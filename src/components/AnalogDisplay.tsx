@@ -9,9 +9,10 @@ type Props = {
   coords: [number, number]
   chosenCoords: [number, number]
   timeZone: string
+  numClocks: number
 }
 
-const AnalogDisplay = ({ now, isNow, chosenTime, coords, chosenCoords, timeZone}: Props) => {
+const AnalogDisplay = ({ now, isNow, chosenTime, coords, chosenCoords, timeZone, numClocks}: Props) => {
 
   const liveDate = getLocaleDate(now, timeZone)
   let chosenDate = new Date()
@@ -19,13 +20,13 @@ const AnalogDisplay = ({ now, isNow, chosenTime, coords, chosenCoords, timeZone}
   if (chosenCoords === coords) {
       const [hours, minutes] = chosenTime.split(':').map(Number)
       chosenDate.setHours(hours, minutes, 0, 0)
-    } else {
-      const timestamp = convertChosenTimeToTimestamp(chosenTime, timeZone)
-      chosenDate = getLocaleDate(timestamp, timeZone)
-    }
+  } else {
+    const timestamp = convertChosenTimeToTimestamp(chosenTime, timeZone)
+    chosenDate = getLocaleDate(timestamp, timeZone)
+  }
 
   return (
-    <div className='size-[8em]'>
+    <div className={numClocks === 2 ? "size-[7em]" : numClocks === 3 ? "size-[4.5em]" : "size-[3em]"}>
       <Clock
         className='react-clock bg-white rounded-full' 
         value={isNow ? liveDate : chosenDate} />

@@ -8,9 +8,9 @@ const LONDON: [number, number] = [51.4500, 0.0500]
 const Home = () => {
   const [now, setNow] = useState<number>(Date.now())
   const [isNow, setIsNow] = useState<boolean>(true)
-  const [chosenTime, setChosenTime] = useState<string>("00:00")
+  const [chosenTime, setChosenTime] = useState<string>('00:00')
   const [chosenCoords, setChosenCoords] = useState<[number, number]>(MELBOURNE)
-  const [locationStatus, setLocationStatus] = useState("")
+  const [locationStatus, setLocationStatus] = useState('')
   const [userCoords, setUserCoords] = useState<[number, number] | null>(null)
   const [clocks, setClocks] = useState<Array<[number, number]>>([userCoords ?? MELBOURNE, LONDON])
   const [isTwentyFourHour, setIsTwentyFourHour] = useState<boolean>(true)
@@ -72,30 +72,34 @@ const Home = () => {
     }
   }, [userCoords])
 
-  let gridClass: string
-
-  if (clocks.length === 1) {
-    gridClass = 'grid-cols-1'
-  } else if (clocks.length === 2) {
-    gridClass = 'grid-cols-2'
-  } else if (clocks.length === 3) {
-    gridClass = 'grid-cols-3'
-  } else if (clocks.length === 4) {
-    gridClass = 'grid-cols-2 grid-rows-2'
-  } else if (clocks.length === 5) {
-    gridClass = 'grid-cols-3 grid-rows-2'
-  } else if (clocks.length === 6) {
-    gridClass = 'grid-cols-3 grid-rows-2'
-  } else {
-    gridClass = 'grid-cols-4 grid-rows-2'
-  }
-
   return (
-    <main className="flex flex-col justify-evenly items-center gap-10 p-10 h-[80%] bg-white">
-      <div className='flex w-full'>
-        <div className='flex w-full gap-20'>
+    <main 
+      className='
+      border border-red-400 
+      flex-grow 
+      flex flex-col
+      bg-white
+    '>
+      <div 
+        className='
+        btns
+        w-full
+        p-2
+        flex justify-between
+      '>
+        <div className='
+          blue-btns
+          flex gap-3
+          tracking-wide
+        '>
           <button 
-            className="w-1/7 py-2 px-4 rounded bg-indigo-600 hover:bg-indigo-800 text-xl text-white font-bold" 
+            className='
+            px-2 py-1
+            bg-indigo-600 
+            rounded 
+            text-white font-medium
+            hover:bg-indigo-800 
+            ' 
             onClick={() => {
               setIsNow(true)
               setNow(Date.now())
@@ -103,27 +107,40 @@ const Home = () => {
               Reset to Now
           </button>
           <button
-            className="w-1/7 py-2 px-4 rounded bg-indigo-600 hover:bg-indigo-800 text-xl text-white font-bold"
+            className='
+            px-2 py-1
+            bg-indigo-600 
+            rounded 
+            text-white font-medium
+            hover:bg-indigo-800 
+            ' 
             onClick={() => setClocks(prev => [...prev, getRandomCoords()])}
             >
             Add Clock
           </button>
         </div>
         <button
-          className="w-1/10 py-2 px-4 rounded bg-purple-600 hover:bg-purple-800 text-xl text-white font-bold tracking-widest"
+          className='
+          AM/PM-btn
+          px-2 py-1
+          bg-purple-600 
+          rounded 
+          text-white font-medium tracking-widest
+          hover:bg-purple-800 
+          '
           onClick={() => setIsTwentyFourHour(!isTwentyFourHour)}
         >
           {isTwentyFourHour ? 'AM / PM' : '24H'} 
         </button>
       </div>
-      <div className={`
-        grid 
-        gap-6 
-        w-full 
-        h-full
-        ${gridClass}
-        auto-rows-fr
-      `}>
+      <div className='
+        clocks
+        border border-black
+        p-4
+        flex-grow 
+        flex flex-wrap justify-center items-center gap-8 
+        content-center
+      '>
         {clocks.map((coords, idx) => (
           <Time
           key={idx}
@@ -136,16 +153,17 @@ const Home = () => {
           coords={coords}
           chosenCoords={chosenCoords}
           setChosenCoords={setChosenCoords}
+          numClocks={clocks.length}
+          onRemove={() => {
+            setClocks(prev => {
+              const updated = prev.filter((coordinates)=> coordinates !== coords)
+              return updated
+            })
+          }}
           onCoordsChange={(newCoords) => {
             setClocks(prev => {
               const updated = [...prev]
               updated[idx] = newCoords
-              return updated
-            })
-          }}
-          onRemove={() => {
-            setClocks(prev => {
-              const updated = prev.filter((coordinates)=> coordinates !== coords)
               return updated
             })
           }}
