@@ -1,6 +1,14 @@
 export const getRandomCoords = (): [number, number] => {
+
+    type Bounds = { 
+        latMin: number; 
+        latMax: number; 
+        lngMin: number; 
+        lngMax: number 
+    }        
+
     // ensure that random coordinates will fall on land (most likely, oceania contains lots of islands and water but ~95% of hitting land)
-    const continents = {
+    const continents: Record<string, Bounds> = {
         Africa: { latMin: -35, latMax: 37, lngMin: -18, lngMax: 52 },
         Asia: { latMin: 1, latMax: 77, lngMin: 26, lngMax: 180 },
         Europe: { latMin: 36, latMax: 71, lngMin: -25, lngMax: 45 },
@@ -8,7 +16,7 @@ export const getRandomCoords = (): [number, number] => {
         SouthAmerica: { latMin: -56, latMax: 13, lngMin: -81, lngMax: -35 },
         Australia: { latMin: -44, latMax: -10, lngMin: 112, lngMax: 154 },
         Oceania: { latMin: -50, latMax: 0, lngMin: 110, lngMax: 180 },
-    }
+    } 
     
     const continentNames = Object.keys(continents)
     const randomContinent = continentNames[Math.floor(Math.random() * continentNames.length)]
