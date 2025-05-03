@@ -75,7 +75,7 @@ const Home = () => {
   return (
     <main 
       className='
-      border border-red-400 
+      border-red-400 
       flex-grow 
       flex flex-col
       bg-white
@@ -84,7 +84,7 @@ const Home = () => {
         className='
         btns
         w-full
-        p-2
+        py-2 px-4 mt-1
         flex justify-between
       '>
         <div className='
@@ -135,10 +135,9 @@ const Home = () => {
       </div>
       <div className='
         clocks
-        border border-black
-        p-4
+        border-black
         flex-grow 
-        flex flex-wrap justify-center items-center gap-8 
+        flex flex-wrap justify-center items-center gap-6 
         content-center
       '>
         {clocks.map((coords, idx) => (

@@ -89,30 +89,31 @@ const Location = ({
             <p className='border-pink-800'>
                 {timeZoneOffset}
             </p>
-            <input
-                className='
-                border-yellow-600 
-                relative
-                text-center
-                '
-                type="text"
-                value={input}
-                onChange={(e) => {
-                    setInput(e.target.value)
-                    setIsSearching(true)
-                }}
-                placeholder="Type a city name"
-            />
-            {suggestions.length > 0 && (
-                <ul 
-                className='
-                absolute 
-                bg-white border-gray-200 
-                list-none 
-                overflow-y-auto 
-                z-999
-                '
-                >
+            <div className="relative">
+                <input
+                    className='
+                    border-yellow-600 
+                    relative
+                    text-center
+                    '
+                    type="text"
+                    value={input}
+                    onChange={(e) => {
+                        setInput(e.target.value)
+                        setIsSearching(true)
+                    }}
+                    placeholder="Type a city name"
+                    />
+                {suggestions.length > 0 && (
+                    <ul 
+                    className='
+                    absolute left-0 top-full w-full mt-1
+                    bg-white border-gray-200
+                    text-[0.8rem] 
+                    list-none 
+                    overflow-y-scroll 
+                    z-999
+                    '>
                     {suggestions.map((loc) => (
                         <li
                         key={loc.id}
@@ -122,8 +123,9 @@ const Location = ({
                             {`${loc.city}, ${loc.country}`}
                         </li>
                     ))}
-                </ul>
-            )}
+                    </ul>
+                )}
+            </div>
         </div>
     )
 

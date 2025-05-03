@@ -7,7 +7,7 @@ const Header = () => {
         p-3
         flex justify-between items-center
         bg-teal-50
-      `  text-indigo-900
+        text-indigo-900
     ">
       <div className="flex flex-col">
         <h1 className="text-[2rem] font-bold">TimeZones</h1>
